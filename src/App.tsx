@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component, ReactElement } from "react";
+import TaskObjectType from "./ObjectTypes/TaskObjectType";
+import Header from "./Header";
+import Task from "./TaskList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type AppState = {
+    tasks: TaskObjectType[]
+};
+
+class App extends Component {
+    state: Readonly<AppState> = {
+        tasks: [
+            new TaskObjectType(1, "this is the first task kljasd aslkdj asdasl jdlasd alskdj asldkjas dlaksjd aslkdja sdlkjas dlakjsdlaksjd laskdj  alskjd alskdj aslkdj asldkjasd lkasjd alksdja slkdjaslkdj ", true),
+            new TaskObjectType(2, "this is the second task", false),
+            new TaskObjectType(3, "this is the third task", false),
+            new TaskObjectType(4, "this is the fourth task", true),
+            new TaskObjectType(5, "this is the fifth task", false)
+        ]
+    }
+
+    render(): ReactElement {
+        return (
+            <div>
+                <Header/>
+                <Task tasks={this.state.tasks}/>
+            </div>
+        );
+    }
 }
 
 export default App;

@@ -1,15 +1,7 @@
-class TaskObjectType
-{
-    public id: number;
-    public description: string;
-    public completed: boolean;
-
-    constructor(id: number, descrition: string, completed: boolean)
-    {
-        this.id = id;
-        this.description = descrition;
-        this.completed = completed;
-    }    
+type TaskObjectType = {
+    id: number,
+    description: string,
+    completed: boolean
 }
 
 export default TaskObjectType;

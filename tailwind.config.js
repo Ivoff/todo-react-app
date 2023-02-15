@@ -5,7 +5,11 @@ module.exports = {
     "./public/index.html"
   ],
   theme: {
-    extend: {},
+    extend: {
+      rotate: {
+        '270': '270deg',
+      }
+    },
   },
   plugins: [],
 }

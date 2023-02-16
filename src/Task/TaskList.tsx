@@ -17,7 +17,7 @@ export default function TaskList() {
             {
                 id: 1, 
                 description: "this is the first task kljasd aslkdj asdasl jdlasd alskdj asldkjas dlaksjd aslkdja sdlkjas dlakjsdlaksjd laskdj  alskjd alskdj aslkdj asldkjasd lkasjd alksdja slkdjaslkdj ", 
-                completed: true
+                completed: false
             },
             {id: 2, description: "this is the second task", completed: false},
             {id: 3, description: "this is the third task", completed: false},
@@ -32,7 +32,7 @@ export default function TaskList() {
     const handleHideButton = (event: React.SyntheticEvent):void => {        
         event.preventDefault();
 
-        setHideToggle(hideToggle);
+        setHideToggle(!hideToggle);
     }
 
     const getHideButton = (): ReactElement => {
@@ -62,7 +62,7 @@ export default function TaskList() {
         return tasks.map((x): ReactElement => {
             opacity = x.completed ? "opacity-30" : "opacity-100";
             return (
-                <Task opacity={opacity} task={x} key={x.id}/>
+                <Task opacity={opacity} task={x} tasksDispatch={dispatchTasks} key={x.id}/>
             );
         });        
     }

@@ -1,7 +1,8 @@
 type TaskObjectType = {
     id: number,
     description: string,
-    completed: boolean
+    completed: boolean,
+    createdAt: Date
 }
 
 export default TaskObjectType;

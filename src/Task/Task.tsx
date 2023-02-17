@@ -35,21 +35,40 @@ export default function Task(props: TaskPropObjectType): ReactElement {
     }
 
     const getDescription = (): ReactElement => {
+        let lowerPart: ReactElement;
+
         if (!edit)
-            return <p className={"p-1 pl-2 self-center whitespace-pre-line "+opacity}>{task.description}</p>;
+            lowerPart = <p className={`p-1 pl-2 whitespace-pre-line ${opacity}`}>{task.description}</p>;        
+        else
+            lowerPart = (
+                <TextArea 
+                    defaultValue={task.description}
+                    newDescription={newDescription}
+                    setNewDescription={setNewDescription}
+                    onKeyUp={(e) => {
+                        if (e.key === "Escape") {
+                            setEdit(!edit);
+                            setNewDescription(task.description)
+                        }
+                    }}
+                />
+            );
         
+        const upperPart: ReactElement = (
+            <p className="font-mono pr-4">
+                {task.createdAt.toLocaleString("en-GB")}
+            </p>
+        );
+
         return (
-            <TextArea 
-                defaultValue={task.description}
-                newDescription={newDescription}
-                setNewDescription={setNewDescription}
-                onKeyUp={(e) => {
-                    if (e.key === "Escape") {
-                        setEdit(!edit);
-                        setNewDescription(task.description)
-                    }
-                }}
-            />
+            <div className="flex flex-col w-full">
+                <div className={`w-full flex flex-row-reverse bg-slate-100 ${opacity}`}>
+                    {upperPart}
+                </div>
+                <div className="basis-full">
+                    {lowerPart}
+                </div>
+            </div>
         )
     }
 
@@ -98,7 +117,17 @@ export default function Task(props: TaskPropObjectType): ReactElement {
             <div className={"basis-2/12 "}>
                 <div className="flex flex-row justify-end h-full">
                     {getEditButton()}
-                    <button className="basis-1/2 bg-red-300 font-bold hover:bg-red-500 hover:text-white"><i className="fa fa-close"></i></button>
+                    <button 
+                        className="basis-1/2 bg-red-300 font-bold hover:bg-red-500 hover:text-white"
+                        onClick={() => {
+                            props.tasksDispatch({
+                                task: {id: props.task.id},
+                                type: "delete"
+                            });
+                        }}
+                    >
+                            <i className="fa fa-close"></i>
+                    </button>
                 </div>
             </div>
         </div>

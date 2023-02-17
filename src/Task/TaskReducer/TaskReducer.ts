@@ -1,6 +1,7 @@
 import TaskObjectType from "../../ObjectTypes/TaskObjectType";
 import TaskAddObjectType from "../../ObjectTypes/TaskAddObjectType";
 import TaskRemoveObjectType from "../../ObjectTypes/TaskRemoveObjectType";
+import UniqueKey from "../../UniqueKeyProvider";
 
 type TaskEditObjectType = TaskObjectType;
 
@@ -18,9 +19,10 @@ function TasksReducer(tasks: Readonly<TaskObjectType[]>, action: TaskAction): Ta
             result = [
                 ...tasks,
                 {
-                    id: tasks.length+1, 
+                    id: UniqueKey.next(), 
                     description: actionTask.description, 
-                    completed: false
+                    completed: false,
+                    createdAt: new Date()
                 }
             ];
         } break;
